@@ -1,4 +1,5 @@
 import {
+    blockRandomization,
     finalizeBlockRandomization,
     firebaseUserId,
     writeRealtimeDatabase,
@@ -154,7 +155,7 @@ const setData = () => {
     }
 
     trialData.coords = coords;
-    console.log(trialData);
+    // console.log(trialData);
 }
 
 const resetTrial = () => {
@@ -195,7 +196,7 @@ startButton.onclick = async () => {
 
     introJs().setOptions({
         exitOnEsc: false, exitOnOverlayClick: false,
-        // showBullets: false, keyboardNavigation: false,
+        showBullets: false, keyboardNavigation: false,
 
         steps: [{
             title: 'Welcome',
@@ -383,13 +384,11 @@ redirectButton.onclick = () => {
 // initialize
 writeURLParameters(dbPath + '/pid')
 
-const condition = [4]
+const condition = await blockRandomization(studyId, "ai", 2, 100, 1)
+expData.condition = condition[0] + 3;
 
-// const condition = await blockRandomization(studyId, "ai", 3, 100, 1)
-expData.condition = condition[0];
-
-const dataPath = `data${condition[0]}.json`
-console.log(condition);
+const dataPath = `data${expData.condition}.json`;
+console.log(expData.condition);
 
 getData().then(() => setData())
 
