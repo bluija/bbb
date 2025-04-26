@@ -384,8 +384,8 @@ redirectButton.onclick = () => {
 // initialize
 writeURLParameters(dbPath + '/pid')
 
-const condition = await blockRandomization(studyId, "ai", 2, 100, 1)
-expData.condition = condition[0] + 3;
+const condition = await blockRandomization(studyId, "ai", 5, 100, 1)
+expData.condition = condition[0];
 
 const dataPath = `data${expData.condition}.json`;
 console.log(expData.condition);
